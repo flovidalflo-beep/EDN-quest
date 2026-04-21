@@ -1,11 +1,16 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EDN Quest 🎓 — Bibliothèque de quiz</title>
+<meta name="theme-color" content="#1F3864">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EDN Quest">
+<link id="pwa-manifest" rel="manifest">
+<link id="pwa-icon" rel="apple-touch-icon">
 <style>
 :root {
   --navy: #1F3864; --navy-light: #2F5496; --navy-dark: #0F1F3F;
@@ -526,92 +531,6 @@ body {
 .code-block .boolean { color: #F3A8FF; }
 
 .tiny-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
-
-/* ========== ÉDITEUR DE QUIZ ========== */
-.edit-modal { max-width: 820px; }
-.edit-section {
-  margin-bottom: 10px; border: 1.5px solid var(--border);
-  border-radius: 12px; overflow: hidden;
-}
-.edit-section-head {
-  padding: 10px 16px; background: var(--bg);
-  display: flex; align-items: center; justify-content: space-between;
-  cursor: pointer; user-select: none; gap: 10px;
-}
-.edit-section-head:hover { background: #EEF2FF; }
-.edit-section-title { font-size: 13px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 8px; }
-.edit-section-count { background: var(--navy); color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
-.edit-section-arrow { font-size: 11px; color: var(--muted); transition: transform 0.2s; }
-.edit-section.collapsed .edit-section-arrow { transform: rotate(-90deg); }
-.edit-section-body { display: none; }
-.edit-section:not(.collapsed) .edit-section-body { display: block; }
-.edit-q-item {
-  padding: 12px 16px; border-bottom: 1px solid var(--border);
-  display: flex; align-items: flex-start; gap: 12px;
-}
-.edit-q-item:last-child { border-bottom: none; }
-.edit-q-num {
-  min-width: 24px; height: 24px; border-radius: 50%;
-  background: var(--navy); color: white;
-  font-size: 11px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 2px;
-}
-.edit-q-text { flex: 1; font-size: 13px; color: var(--text); line-height: 1.45; }
-.edit-q-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-.edit-q-actions { display: flex; gap: 4px; flex-shrink: 0; }
-.edit-q-btn {
-  background: none; border: 1.5px solid var(--border);
-  border-radius: 7px; padding: 4px 8px;
-  font-size: 12px; cursor: pointer; font-family: inherit;
-  color: var(--muted); transition: all 0.12s;
-}
-.edit-q-btn:hover { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
-.edit-q-btn.danger:hover { background: var(--red-light); border-color: var(--red); color: var(--red); }
-
-/* Modal d'édition d'une question */
-.qedit-field { margin-bottom: 14px; }
-.qedit-label { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 5px; display: block; text-transform: uppercase; letter-spacing: 0.4px; }
-.qedit-input, .qedit-textarea {
-  width: 100%; padding: 9px 12px;
-  border: 2px solid var(--border); border-radius: 8px;
-  font-size: 13px; font-family: inherit; line-height: 1.45;
-  transition: border-color 0.15s;
-}
-.qedit-input:focus, .qedit-textarea:focus { outline: none; border-color: var(--navy); }
-.qedit-textarea { min-height: 70px; resize: vertical; }
-.qedit-options { display: flex; flex-direction: column; gap: 6px; }
-.qedit-option { display: flex; align-items: center; gap: 8px; }
-.qedit-option input[type=text] {
-  flex: 1; padding: 7px 10px;
-  border: 2px solid var(--border); border-radius: 7px;
-  font-size: 13px; font-family: inherit;
-}
-.qedit-option input[type=text]:focus { outline: none; border-color: var(--navy); }
-.qedit-option-correct {
-  width: 20px; height: 20px; border-radius: 50%;
-  border: 2px solid var(--border); cursor: pointer;
-  flex-shrink: 0; transition: all 0.12s;
-  background: white;
-}
-.qedit-option-correct.selected { background: var(--green); border-color: var(--green); }
-.qedit-option-letter {
-  min-width: 22px; height: 22px; border-radius: 50%;
-  background: var(--bg); border: 1.5px solid var(--border);
-  font-size: 11px; font-weight: 700; color: var(--navy);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.qedit-multi-note { font-size: 11px; color: var(--muted); margin-top: 4px; font-style: italic; }
-.qedit-correct-row { display: flex; align-items: center; gap: 8px; }
-.toggle-correct-btn {
-  padding: 4px 10px; border-radius: 6px;
-  border: 1.5px solid var(--border);
-  font-size: 11px; font-weight: 600; cursor: pointer;
-  background: white; font-family: inherit; color: var(--muted);
-  transition: all 0.12s;
-}
-.toggle-correct-btn.on { background: var(--green-light); border-color: var(--green); color: var(--green); }
 
 /* ========== RACCOURCIS CLAVIER ========== */
 .kbd-badge {
@@ -1394,16 +1313,14 @@ function renderQuizCard(quiz) {
         ${played > 0 ? `<span class="qc-stat">🎯 ${best}%</span><span class="qc-stat">🔄 ${played}</span>` : '<span class="qc-stat" style="opacity:0.6;">Jamais joué</span>'}
       </div>
       <div class="qc-actions">
-        <button class="icon-btn" title="Modifier les questions">✏️</button>
         <button class="icon-btn" title="Exporter ce quiz (JSON)">⬇</button>
         <button class="icon-btn danger" title="Supprimer ce quiz">🗑</button>
       </div>
     </div>
   `;
   const actions = card.querySelectorAll('.icon-btn');
-  actions[0].addEventListener('click', (e)=>{ e.stopPropagation(); openEditModal(quiz); });
-  actions[1].addEventListener('click', (e)=>{ e.stopPropagation(); exportQuiz(quiz); });
-  actions[2].addEventListener('click', (e)=>{ e.stopPropagation(); deleteQuiz(quiz); });
+  actions[0].addEventListener('click', (e)=>{ e.stopPropagation(); exportQuiz(quiz); });
+  actions[1].addEventListener('click', (e)=>{ e.stopPropagation(); deleteQuiz(quiz); });
   return card;
 }
 
@@ -1426,387 +1343,6 @@ function exportQuiz(quiz) {
   const copy = Object.assign({}, quiz);
   downloadJson(`quiz_${safe}.json`, copy);
   toast(`Export : ${quiz.title}`, 'success');
-}
-
-/* ============================================================
-   ÉDITEUR DE QUESTIONS
-   ============================================================ */
-
-const EDIT_SECTIONS = [
-  { key:'flashcards', label:'Flashcards', icon:'🃏',
-    preview: q => q.front,
-    sub: q => q.cat ? `Catégorie : ${q.cat}` : '' },
-  { key:'qcm', label:'QCM', icon:'🎯',
-    preview: q => q.q,
-    sub: q => Array.isArray(q.correct) ? `Réponses multiples (${q.correct.length} bonnes)` : `Réponse unique → ${['A','B','C','D'][q.correct]||q.correct}` },
-  { key:'vraiFaux', label:'Vrai/Faux', icon:'🪤',
-    preview: q => q.statement,
-    sub: q => q.answer ? '✅ VRAI' : '❌ FAUX' },
-  { key:'speed', label:'Défi Express', icon:'⚡',
-    preview: q => q.q,
-    sub: q => `Réponse : ${q.a}` },
-  { key:'associations', label:'Associations', icon:'🔗',
-    preview: q => q.title,
-    sub: q => `${(q.pairs||[]).length} paires` },
-  { key:'cas', label:'Cas cliniques', icon:'📋',
-    preview: q => q.title,
-    sub: q => `${(q.questions||[]).length} questions` }
-];
-
-function openEditModal(quiz) {
-  const backdrop = el('div', { className:'modal-backdrop' });
-  backdrop.addEventListener('click', e => { if(e.target === backdrop) backdrop.remove(); });
-
-  const modal = el('div', { className:'modal edit-modal' });
-  modal.innerHTML = `
-    <div class="modal-head">
-      <h2>✏️ Modifier — ${escapeHtml(quiz.title)}</h2>
-      <button class="modal-close">✕</button>
-    </div>
-    <div class="modal-body" id="edit-modal-body"></div>
-    <div class="modal-foot">
-      <button class="btn ghost" id="edit-cancel">Fermer</button>
-    </div>
-  `;
-  modal.querySelector('.modal-close').addEventListener('click', () => backdrop.remove());
-  modal.querySelector('#edit-cancel').addEventListener('click', () => backdrop.remove());
-
-  backdrop.appendChild(modal);
-  document.body.appendChild(backdrop);
-  renderEditBody(quiz, modal.querySelector('#edit-modal-body'));
-}
-
-function renderEditBody(quiz, container) {
-  container.innerHTML = '';
-  EDIT_SECTIONS.forEach(sec => {
-    const items = quiz[sec.key] || [];
-    const section = el('div', { className:'edit-section collapsed' });
-
-    const head = el('div', { className:'edit-section-head' });
-    head.innerHTML = `
-      <div class="edit-section-title">
-        ${sec.icon} ${sec.label}
-        <span class="edit-section-count">${items.length}</span>
-      </div>
-      <span class="edit-section-arrow">▼</span>
-    `;
-    head.addEventListener('click', () => section.classList.toggle('collapsed'));
-    section.appendChild(head);
-
-    const body = el('div', { className:'edit-section-body' });
-
-    if(items.length === 0) {
-      const empty = el('div', { style:'padding:14px 16px;font-size:13px;color:var(--muted);font-style:italic;' });
-      empty.textContent = 'Aucun élément dans cette section.';
-      body.appendChild(empty);
-    } else {
-      items.forEach((item, idx) => {
-        const row = el('div', { className:'edit-q-item' });
-        const num = el('div', { className:'edit-q-num' });
-        num.textContent = idx + 1;
-        const textDiv = el('div', { className:'edit-q-text' });
-        // strip html tags for preview
-        const previewText = sec.preview(item).replace(/<[^>]+>/g, '');
-        textDiv.textContent = previewText.length > 100 ? previewText.slice(0, 100) + '…' : previewText;
-        const subText = sec.sub(item);
-        if(subText) {
-          const sub = el('div', { className:'edit-q-sub' });
-          sub.textContent = subText;
-          textDiv.appendChild(sub);
-        }
-        const actions = el('div', { className:'edit-q-actions' });
-        const editBtn = el('button', { className:'edit-q-btn', title:'Modifier' });
-        editBtn.textContent = '✏️ Modifier';
-        editBtn.addEventListener('click', () => openQuestionEditor(quiz, sec.key, idx, () => {
-          saveQuizToLibrary(quiz);
-          renderEditBody(quiz, container);
-        }));
-        const delBtn = el('button', { className:'edit-q-btn danger', title:'Supprimer' });
-        delBtn.textContent = '🗑';
-        delBtn.addEventListener('click', () => {
-          if(!confirm(`Supprimer la question ${idx + 1} de "${sec.label}" ?`)) return;
-          quiz[sec.key].splice(idx, 1);
-          saveQuizToLibrary(quiz);
-          renderEditBody(quiz, container);
-        });
-        actions.appendChild(editBtn);
-        actions.appendChild(delBtn);
-        row.appendChild(num);
-        row.appendChild(textDiv);
-        row.appendChild(actions);
-        body.appendChild(row);
-      });
-    }
-    section.appendChild(body);
-    container.appendChild(section);
-  });
-}
-
-function saveQuizToLibrary(quiz) {
-  const idx = app.library.findIndex(q => q.id === quiz.id);
-  if(idx !== -1) app.library[idx] = quiz;
-  Storage.setLibrary(app.library);
-  toast('Quiz mis à jour ✓', 'success');
-}
-
-/* ---------- Éditeur d'une question individuelle ---------- */
-function openQuestionEditor(quiz, sectionKey, itemIdx, onSave) {
-  const item = quiz[sectionKey][itemIdx];
-  const backdrop = el('div', { className:'modal-backdrop', style:'z-index:200;' });
-  backdrop.addEventListener('click', e => { if(e.target === backdrop) backdrop.remove(); });
-
-  const modal = el('div', { className:'modal', style:'max-width:660px;' });
-  const title = { flashcards:'Flashcard', qcm:'QCM', vraiFaux:'Vrai/Faux', speed:'Défi Express', associations:'Association', cas:'Cas clinique' }[sectionKey] || sectionKey;
-  modal.innerHTML = `
-    <div class="modal-head">
-      <h2>✏️ ${title} #${itemIdx + 1}</h2>
-      <button class="modal-close">✕</button>
-    </div>
-    <div class="modal-body" id="qedit-body" style="max-height:70vh;overflow-y:auto;"></div>
-    <div class="modal-foot">
-      <button class="btn ghost" id="qedit-cancel">Annuler</button>
-      <button class="btn primary" id="qedit-save">💾 Enregistrer</button>
-    </div>
-  `;
-  modal.querySelector('.modal-close').addEventListener('click', () => backdrop.remove());
-  modal.querySelector('#qedit-cancel').addEventListener('click', () => backdrop.remove());
-
-  backdrop.appendChild(modal);
-  document.body.appendChild(backdrop);
-
-  const body = modal.querySelector('#qedit-body');
-  const fields = buildQuestionFields(sectionKey, item, body);
-
-  modal.querySelector('#qedit-save').addEventListener('click', () => {
-    const updated = collectQuestionFields(sectionKey, item, fields);
-    if(!updated) return; // validation failed
-    Object.assign(quiz[sectionKey][itemIdx], updated);
-    backdrop.remove();
-    onSave();
-  });
-}
-
-function field(label, inputEl) {
-  const wrap = el('div', { className:'qedit-field' });
-  const lbl = el('label', { className:'qedit-label' });
-  lbl.textContent = label;
-  wrap.appendChild(lbl);
-  wrap.appendChild(inputEl);
-  return wrap;
-}
-function textarea(value, rows) {
-  const t = el('textarea', { className:'qedit-textarea' });
-  t.value = value || '';
-  t.rows = rows || 3;
-  return t;
-}
-function input(value) {
-  const i = el('input', { className:'qedit-input', type:'text' });
-  i.value = value || '';
-  return i;
-}
-
-function buildQuestionFields(sectionKey, item, body) {
-  const refs = {};
-
-  if(sectionKey === 'flashcards') {
-    refs.cat = input(item.cat || '');
-    refs.front = textarea(item.front, 2);
-    refs.back = textarea(item.back, 4);
-    body.appendChild(field('Catégorie', refs.cat));
-    body.appendChild(field('Question (front)', refs.front));
-    body.appendChild(field('Réponse HTML (back)', refs.back));
-  }
-
-  else if(sectionKey === 'qcm') {
-    refs.q = textarea(item.q, 3);
-    body.appendChild(field('Question', refs.q));
-    // Options
-    const isMulti = Array.isArray(item.correct);
-    const optWrap = el('div', { className:'qedit-field' });
-    const optLbl = el('label', { className:'qedit-label' });
-    optLbl.textContent = isMulti ? 'Options (cocher les bonnes réponses)' : 'Options (sélectionner la bonne réponse)';
-    optWrap.appendChild(optLbl);
-    const optList = el('div', { className:'qedit-options' });
-    refs.optInputs = [];
-    refs.correctToggles = [];
-    (item.options || ['','','','']).forEach((opt, oi) => {
-      const row = el('div', { className:'qedit-option' });
-      const letter = el('div', { className:'qedit-option-letter' });
-      letter.textContent = ['A','B','C','D','E'][oi];
-      const txt = el('input', { type:'text', value: opt });
-      const isCorrect = isMulti ? item.correct.includes(oi) : item.correct === oi;
-      const toggle = el('div', { className:'qedit-option-correct' + (isCorrect ? ' selected' : ''), title: 'Bonne réponse' });
-      toggle.dataset.idx = oi;
-      toggle.addEventListener('click', () => {
-        if(!isMulti) {
-          refs.correctToggles.forEach(t => t.classList.remove('selected'));
-        }
-        toggle.classList.toggle('selected');
-      });
-      row.appendChild(toggle);
-      row.appendChild(letter);
-      row.appendChild(txt);
-      refs.optInputs.push(txt);
-      refs.correctToggles.push(toggle);
-      optList.appendChild(row);
-    });
-    const note = el('div', { className:'qedit-multi-note' });
-    note.textContent = isMulti ? '✔ QCM multi — plusieurs réponses possibles.' : 'QCM mono — une seule réponse.';
-    optWrap.appendChild(optList);
-    optWrap.appendChild(note);
-    body.appendChild(optWrap);
-    refs.explain = textarea(item.explain, 3);
-    refs.isMulti = isMulti;
-    body.appendChild(field('Explication HTML', refs.explain));
-  }
-
-  else if(sectionKey === 'vraiFaux') {
-    refs.statement = textarea(item.statement, 2);
-    body.appendChild(field('Affirmation', refs.statement));
-    // Toggle V/F
-    const vfWrap = el('div', { className:'qedit-field' });
-    const vfLbl = el('label', { className:'qedit-label' });
-    vfLbl.textContent = 'Réponse correcte';
-    const vfRow = el('div', { className:'qedit-correct-row' });
-    const vBtn = el('button', { className:'toggle-correct-btn' + (item.answer === true ? ' on' : ''), type:'button' });
-    vBtn.textContent = '✅ VRAI';
-    const fBtn = el('button', { className:'toggle-correct-btn' + (item.answer === false ? ' on' : ''), type:'button' });
-    fBtn.textContent = '❌ FAUX';
-    vBtn.addEventListener('click', () => { vBtn.classList.add('on'); fBtn.classList.remove('on'); });
-    fBtn.addEventListener('click', () => { fBtn.classList.add('on'); vBtn.classList.remove('on'); });
-    refs.vBtn = vBtn; refs.fBtn = fBtn;
-    vfRow.appendChild(vBtn); vfRow.appendChild(fBtn);
-    vfWrap.appendChild(vfLbl); vfWrap.appendChild(vfRow);
-    body.appendChild(vfWrap);
-    refs.explain = textarea(item.explain, 3);
-    body.appendChild(field('Explication HTML', refs.explain));
-  }
-
-  else if(sectionKey === 'speed') {
-    refs.q = textarea(item.q, 2);
-    refs.a = input(item.a);
-    body.appendChild(field('Question', refs.q));
-    body.appendChild(field('Réponse courte', refs.a));
-  }
-
-  else if(sectionKey === 'associations') {
-    refs.title = input(item.title);
-    body.appendChild(field('Titre de la manche', refs.title));
-    const pairsWrap = el('div', { className:'qedit-field' });
-    const pLbl = el('label', { className:'qedit-label' });
-    pLbl.textContent = 'Paires (gauche → droite)';
-    pairsWrap.appendChild(pLbl);
-    refs.pairsLeft = [];
-    refs.pairsRight = [];
-    (item.pairs || []).forEach((pair, pi) => {
-      const row = el('div', { style:'display:flex;gap:8px;margin-bottom:6px;align-items:center;' });
-      const num = el('span', { style:'font-size:11px;color:var(--muted);min-width:16px;font-weight:700;' });
-      num.textContent = pi + 1;
-      const lIn = el('input', { type:'text', value: pair.left || '', style:'flex:1;padding:7px 10px;border:2px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;' });
-      const arrow = el('span', { style:'color:var(--muted);' });
-      arrow.textContent = '→';
-      const rIn = el('input', { type:'text', value: pair.right || '', style:'flex:1;padding:7px 10px;border:2px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;' });
-      lIn.onfocus = rIn.onfocus = () => { lIn.style.borderColor = 'var(--navy)'; rIn.style.borderColor = 'var(--navy)'; };
-      lIn.onblur = rIn.onblur = () => { lIn.style.borderColor = 'var(--border)'; rIn.style.borderColor = 'var(--border)'; };
-      row.appendChild(num); row.appendChild(lIn); row.appendChild(arrow); row.appendChild(rIn);
-      pairsWrap.appendChild(row);
-      refs.pairsLeft.push(lIn);
-      refs.pairsRight.push(rIn);
-    });
-    body.appendChild(pairsWrap);
-  }
-
-  else if(sectionKey === 'cas') {
-    refs.title = input(item.title);
-    refs.enonce = textarea(item.enonce, 5);
-    body.appendChild(field('Titre du cas', refs.title));
-    body.appendChild(field('Énoncé HTML', refs.enonce));
-    // Questions du cas
-    const qWrap = el('div', { className:'qedit-field' });
-    const qLbl = el('label', { className:'qedit-label' });
-    qLbl.textContent = 'Questions du cas clinique';
-    qWrap.appendChild(qLbl);
-    refs.casQs = [];
-    (item.questions || []).forEach((cq, qi) => {
-      const qBox = el('div', { style:'border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;' });
-      const qTitle = el('div', { style:'font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;' });
-      qTitle.textContent = `Question ${qi + 1}`;
-      const qText = textarea(cq.q, 2);
-      const isMulti = Array.isArray(cq.correct);
-      const opts = cq.options || ['','','',''];
-      const optList2 = el('div', { className:'qedit-options', style:'margin-top:6px;' });
-      const optInputs2 = [];
-      const corrToggles2 = [];
-      opts.forEach((opt, oi) => {
-        const row2 = el('div', { className:'qedit-option' });
-        const letter2 = el('div', { className:'qedit-option-letter' });
-        letter2.textContent = ['A','B','C','D','E'][oi];
-        const txt2 = el('input', { type:'text', value: opt });
-        const isC = isMulti ? cq.correct.includes(oi) : cq.correct === oi;
-        const tog2 = el('div', { className:'qedit-option-correct' + (isC ? ' selected' : ''), title:'Bonne réponse' });
-        tog2.dataset.idx = oi;
-        tog2.addEventListener('click', () => {
-          if(!isMulti) corrToggles2.forEach(t => t.classList.remove('selected'));
-          tog2.classList.toggle('selected');
-        });
-        row2.appendChild(tog2); row2.appendChild(letter2); row2.appendChild(txt2);
-        optInputs2.push(txt2);
-        corrToggles2.push(tog2);
-        optList2.appendChild(row2);
-      });
-      const expIn = textarea(cq.explain, 2);
-      const expLbl = el('div', { style:'font-size:11px;color:var(--muted);margin:6px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;' });
-      expLbl.textContent = 'Explication';
-      qBox.appendChild(qTitle); qBox.appendChild(qText); qBox.appendChild(optList2);
-      qBox.appendChild(expLbl); qBox.appendChild(expIn);
-      qWrap.appendChild(qBox);
-      refs.casQs.push({ qText, optInputs: optInputs2, corrToggles: corrToggles2, isMulti, expIn });
-    });
-    body.appendChild(qWrap);
-  }
-
-  return refs;
-}
-
-function collectQuestionFields(sectionKey, item, refs) {
-  if(sectionKey === 'flashcards') {
-    if(!refs.front.value.trim()) { toast('Le champ Question est vide', 'error'); return null; }
-    return { cat: refs.cat.value.trim(), front: refs.front.value.trim(), back: refs.back.value.trim() };
-  }
-  if(sectionKey === 'qcm') {
-    if(!refs.q.value.trim()) { toast('La question est vide', 'error'); return null; }
-    const options = refs.optInputs.map(i => i.value.trim());
-    const selected = refs.correctToggles.map((t,i) => t.classList.contains('selected') ? i : -1).filter(i => i >= 0);
-    if(selected.length === 0) { toast('Sélectionne au moins une bonne réponse', 'error'); return null; }
-    const correct = refs.isMulti ? selected : selected[0];
-    return { q: refs.q.value.trim(), options, correct, explain: refs.explain.value.trim() };
-  }
-  if(sectionKey === 'vraiFaux') {
-    if(!refs.statement.value.trim()) { toast('L\'affirmation est vide', 'error'); return null; }
-    const answer = refs.vBtn.classList.contains('on');
-    return { statement: refs.statement.value.trim(), answer, explain: refs.explain.value.trim() };
-  }
-  if(sectionKey === 'speed') {
-    if(!refs.q.value.trim() || !refs.a.value.trim()) { toast('Question et réponse requises', 'error'); return null; }
-    return { q: refs.q.value.trim(), a: refs.a.value.trim(), hint: '' };
-  }
-  if(sectionKey === 'associations') {
-    if(!refs.title.value.trim()) { toast('Titre requis', 'error'); return null; }
-    const pairs = refs.pairsLeft.map((l, i) => ({ left: l.value.trim(), right: refs.pairsRight[i].value.trim() }));
-    return { title: refs.title.value.trim(), pairs };
-  }
-  if(sectionKey === 'cas') {
-    if(!refs.title.value.trim()) { toast('Titre requis', 'error'); return null; }
-    const questions = refs.casQs.map(cq => {
-      const options = cq.optInputs.map(i => i.value.trim());
-      const sel = cq.corrToggles.map((t,i) => t.classList.contains('selected') ? i : -1).filter(i => i >= 0);
-      const correct = cq.isMulti ? sel : (sel[0] ?? 0);
-      return { q: cq.qText.value.trim(), options, correct, explain: cq.expIn.value.trim() };
-    });
-    return { title: refs.title.value.trim(), enonce: refs.enonce.value.trim(), questions };
-  }
-  return {};
 }
 
 function deleteQuiz(quiz) {
@@ -2704,6 +2240,7 @@ function renderEnd(view, modeName, modeIcon) {
     onclick: ()=>navigate('play', { id: app.play.quiz.id, mode: app.play.mode })
   }, ['🔁 Rejouer']));
   wrap.appendChild(nav);
+  showKbdBadge('end');
 }
 
 function renderEndCas(view) {
@@ -3316,13 +2853,13 @@ function renderImportContent() {
     drop.addEventListener('drop', (e)=>{
       e.preventDefault();
       drop.classList.remove('dragging');
-      if(e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0], false);
+      if(e.dataTransfer.files[0]) readFileAutoDetect(e.dataTransfer.files[0]);
     });
     cont.appendChild(drop);
     const fileInput = $('file-import');
     fileInput.value = '';
     fileInput.onchange = (ev) => {
-      if(ev.target.files[0]) readFile(ev.target.files[0], false);
+      if(ev.target.files[0]) readFileAutoDetect(ev.target.files[0]);
     };
   }
   else if(importTab === 'bulk') {
@@ -3347,6 +2884,25 @@ function renderImportContent() {
     }, ['📁 …ou charger depuis un fichier']);
     cont.appendChild(fileBtn);
   }
+}
+
+function readFileAutoDetect(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const text = e.target.result;
+    let isBulk = false;
+    try {
+      const sniff = JSON.parse(text);
+      // C'est un export bibliothèque ou un tableau → mode bulk
+      if(Array.isArray(sniff) || (sniff && Array.isArray(sniff.library))) {
+        isBulk = true;
+      }
+    } catch(_) {}
+    validateImportText(text, isBulk);
+    const ta = document.querySelector('.json-textarea');
+    if(ta) ta.value = text;
+  };
+  reader.readAsText(file);
 }
 
 function readFile(file, isBulk) {
@@ -3506,9 +3062,9 @@ const KBD_HINTS = {
     { keys: ['Échap'], action: 'Quitter' }
   ],
   vf: [
-    { keys: ['V','←'], action: 'VRAI' },
-    { keys: ['F','→'], action: 'FAUX' },
-    { keys: ['Entrée'], action: 'Question suivante' },
+    { keys: ['←','V'], action: 'VRAI' },
+    { keys: ['→','F'], action: 'FAUX' },
+    { keys: ['Espace'], action: 'Question suivante' },
     { keys: ['Échap'], action: 'Quitter' }
   ],
   speed: [
@@ -3645,23 +3201,26 @@ function handleKeyboard(ev) {
     if(key === 'Escape') { navigate('quiz', { id: app.play.quiz.id }); return; }
   }
 
-  // ---- VRAI/FAUX ----
+  // ---- VRAI/FAUX (Piège ou Vérité) ----
   if(mode === 'vf') {
     if(!app.play.answered) {
-      if(key === 'v' || key === 'V' || key === 'ArrowRight') {
+      // Flèche GAUCHE ou V = VRAI (bouton de gauche)
+      if(key === 'v' || key === 'V' || key === 'ArrowLeft') {
         ev.preventDefault();
         const vraiBtn = document.querySelector('.vf-btn.vrai:not(:disabled)');
         if(vraiBtn) vraiBtn.click();
         return;
       }
-      if(key === 'f' || key === 'F' || key === 'ArrowLeft') {
+      // Flèche DROITE ou F = FAUX (bouton de droite)
+      if(key === 'f' || key === 'F' || key === 'ArrowRight') {
         ev.preventDefault();
         const fauxBtn = document.querySelector('.vf-btn.faux:not(:disabled)');
         if(fauxBtn) fauxBtn.click();
         return;
       }
     }
-    if(key === 'Enter') {
+    // Espace = question suivante (remplace Entrée pour éviter les conflits)
+    if(key === ' ' || key === 'Spacebar') {
       ev.preventDefault();
       const nextBtn = $('next-btn');
       if(nextBtn && !nextBtn.disabled) nextBtn.click();
@@ -3768,13 +3327,7 @@ function navigateToLibrary() {
 }
 
 
-// Afficher badge sur l'écran de fin
-const _origRenderEnd = renderEnd;
-function renderEnd(view, modeName, modeIcon) {
-  _origRenderEnd(view, modeName, modeIcon);
-  showKbdBadge('end');
-  // Raccourcis écran de fin
-}
+// Note : l'affichage du badge raccourcis sur l'écran de fin est géré directement dans renderEnd()
 
 function boot() {
   // Load from storage
@@ -3798,5 +3351,117 @@ function boot() {
 boot();
 
 </script>
+
+<!-- ===================== PWA BOOTSTRAP ===================== -->
+<script>
+(function() {
+  // 1. Génère une icône 512x512 via Canvas (bleu marine + 🎓)
+  function makeIcon(size) {
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    // Fond bleu marine avec coins arrondis
+    const r = size * 0.18;
+    ctx.fillStyle = '#1F3864';
+    ctx.beginPath();
+    ctx.moveTo(r, 0); ctx.lineTo(size - r, 0);
+    ctx.quadraticCurveTo(size, 0, size, r);
+    ctx.lineTo(size, size - r);
+    ctx.quadraticCurveTo(size, size, size - r, size);
+    ctx.lineTo(r, size); ctx.quadraticCurveTo(0, size, 0, size - r);
+    ctx.lineTo(0, r); ctx.quadraticCurveTo(0, 0, r, 0);
+    ctx.closePath(); ctx.fill();
+    // Emoji 🎓
+    ctx.font = `${size * 0.52}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🎓', size / 2, size / 2 + size * 0.04);
+    // Texte "EDN" en bas
+    ctx.font = `bold ${size * 0.13}px -apple-system, Arial, sans-serif`;
+    ctx.fillStyle = '#D4A017';
+    ctx.fillText('EDN Quest', size / 2, size * 0.84);
+    return c.toDataURL('image/png');
+  }
+
+  const icon512 = makeIcon(512);
+  const icon192 = makeIcon(192);
+
+  // 2. Injecte le manifest comme Blob URL
+  const manifest = {
+    name: 'EDN Quest 🎓',
+    short_name: 'EDN Quest',
+    description: 'Bibliothèque de quiz pédiatrique pour l\'EDN',
+    start_url: window.location.href,
+    display: 'standalone',
+    orientation: 'any',
+    background_color: '#1F3864',
+    theme_color: '#1F3864',
+    icons: [
+      { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+      { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+    ]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  const manifestURL = URL.createObjectURL(blob);
+  document.getElementById('pwa-manifest').href = manifestURL;
+  document.getElementById('pwa-icon').href = icon192;
+
+  // 3. Enregistre le Service Worker inline via Blob
+  if ('serviceWorker' in navigator) {
+    const swCode = `
+const CACHE = 'edn-quest-v1';
+self.addEventListener('install', e => {
+  self.skipWaiting();
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(clients.claim());
+});
+self.addEventListener('fetch', e => {
+  // Cache-first pour les ressources statiques
+  e.respondWith(
+    caches.open(CACHE).then(cache =>
+      cache.match(e.request).then(cached => {
+        if (cached) return cached;
+        return fetch(e.request).then(resp => {
+          if (resp && resp.status === 200) {
+            cache.put(e.request, resp.clone());
+          }
+          return resp;
+        }).catch(() => cached);
+      })
+    )
+  );
+});
+`;
+    const swBlob = new Blob([swCode], { type: 'application/javascript' });
+    const swURL = URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swURL, { scope: '/' })
+      .then(() => console.log('[PWA] Service Worker enregistré'))
+      .catch(e => console.warn('[PWA] SW non supporté en local :', e.message));
+  }
+
+  // 4. Bouton "Installer" discret (Android Chrome)
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Affiche un bouton d'installation dans le header
+    const btn = document.createElement('button');
+    btn.textContent = '📲 Installer';
+    btn.style.cssText = `
+      background:#D4A017; color:#1F3864; border:none; border-radius:10px;
+      padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;
+      font-family:inherit; margin-left:8px;
+    `;
+    btn.onclick = () => {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => { btn.remove(); deferredPrompt = null; });
+    };
+    const nav = document.querySelector('.app-nav');
+    if (nav) nav.appendChild(btn);
+  });
+})();
+</script>
+<!-- =================== FIN PWA BOOTSTRAP =================== -->
 </body>
 </html>
