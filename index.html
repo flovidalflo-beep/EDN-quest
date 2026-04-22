@@ -4126,6 +4126,12 @@ function boot() {
     Storage.setSeeded();
   }
 
+  // Défensive : supprimer tout nœud texte parasite directement dans <body>
+  // (par exemple du CSS qui aurait fui hors de son <style> à cause d'une balise mal fermée)
+  Array.from(document.body.childNodes).forEach(n => {
+    if(n.nodeType === 3 && n.textContent.trim().length > 0) n.remove();
+  });
+
   initKeyboard();
   renderApp();
 }
