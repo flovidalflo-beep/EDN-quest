@@ -4196,35 +4196,56 @@ boot();
   // 3. Enregistre le Service Worker inline via Blob
   if ('serviceWorker' in navigator) {
     const swCode = `
-const CACHE = 'edn-quest-v1';
+const CACHE = 'edn-quest-v3-net-first';
 self.addEventListener('install', e => {
   self.skipWaiting();
 });
 self.addEventListener('activate', e => {
-  e.waitUntil(clients.claim());
+  // Supprime TOUS les anciens caches à chaque activation
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.filter(k => k !== CACHE).map(k => caches.delete(k))
+    )).then(() => clients.claim())
+  );
 });
 self.addEventListener('fetch', e => {
-  // Cache-first pour les ressources statiques
+  // Stratégie NETWORK-FIRST : on tente le réseau, cache en fallback
+  // Cela garantit qu'on récupère la dernière version dès qu'on est en ligne
   e.respondWith(
-    caches.open(CACHE).then(cache =>
-      cache.match(e.request).then(cached => {
-        if (cached) return cached;
-        return fetch(e.request).then(resp => {
-          if (resp && resp.status === 200) {
-            cache.put(e.request, resp.clone());
-          }
-          return resp;
-        }).catch(() => cached);
-      })
-    )
+    fetch(e.request).then(resp => {
+      if (resp && resp.status === 200) {
+        const clone = resp.clone();
+        caches.open(CACHE).then(cache => cache.put(e.request, clone));
+      }
+      return resp;
+    }).catch(() => caches.match(e.request))
   );
+});
+// Message-driven update : permet au client de forcer une purge
+self.addEventListener('message', e => {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
+  if (e.data === 'CLEAR_CACHE') {
+    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+  }
 });
 `;
     const swBlob = new Blob([swCode], { type: 'application/javascript' });
     const swURL = URL.createObjectURL(swBlob);
     navigator.serviceWorker.register(swURL, { scope: '/' })
-      .then(() => console.log('[PWA] Service Worker enregistré'))
+      .then(reg => {
+        console.log('[PWA] SW enregistré');
+        // Force la vérification de mise à jour à chaque chargement
+        reg.update();
+      })
       .catch(e => console.warn('[PWA] SW non supporté en local :', e.message));
+
+    // Quand un nouveau SW prend le contrôle, recharge la page pour garantir la fraîcheur
+    let reloading = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (reloading) return;
+      reloading = true;
+      window.location.reload();
+    });
   }
 
   // 4. Bouton "Installer" discret (Android Chrome)
